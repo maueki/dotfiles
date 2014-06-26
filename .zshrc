@@ -12,6 +12,8 @@ HISTFILE=~/.zsh_history
 HISTSIZE=1000000
 SAVEHIST=1000000
 
+export TERM=xterm-256color
+
 bindkey -e
 bindkey '^W' kill-region
 # 複数の zsh を同時に使う時など history ファイルに上書きせず追加
@@ -160,7 +162,7 @@ export PATH=$HOME/.cabal/bin:$HOME/Library/Haskell/bin:$HOME/opt/play:$HOME/opt/
 if [[ ${OSTYPE} == darwin* ]] then
   alias emacs="/Applications/Emacs.app/Contents/MacOS/Emacs -nw"
 else
-  alias emacs="emacs24 -nw"
+  alias emacs="TERM=screen-256color emacs24 -nw"
 fi
 
 cheat-sheet () { zle -M "`cat ~/.zsh/cheatsheets/cheat-sheet.conf`" }
