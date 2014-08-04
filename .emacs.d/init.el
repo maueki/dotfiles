@@ -71,8 +71,8 @@
 ;; 以下独自設定
 
 ;行番号を表示させる
-(require 'linum)
-(setq linum-format "%5d|")
+;(require 'linum)
+;(setq linum-format "%5d|")
 ;(global-linum-mode)
 
 ;Meta-gで行移動できるようにする
@@ -85,18 +85,12 @@
 (set-buffer-file-coding-system 'utf-8)
 (setq default-buffer-file-coding-system 'utf-8)
 
-; for javascript
-;(autoload 'javascript-mode "javascript" nil t) (setq auto-mode-alist (cons '("\\.js$" . javascript-mode) auto-mode-alist))
-
 ;; C-x bで存在しないバッファを指定して新規バッファを開いたときにはデフォルトでlisp-interaction-modeが起動する。
 (setq default-major-mode 'lisp-interaction-mode)
 
 ; 末尾の改行を自動で付けない
 (setq require-final-newline nil)
 (setq next-line-add-newlines nil)
-
-;; PCのようなregin選択を可能に
-;(pc-selection-mode 1)
 
 ;; shift-tabでwindowを移動する
 (global-set-key [backtab] 'other-window)
@@ -130,16 +124,12 @@
 ;;; 履歴を次回のEmacs起動時にも保存する
 (savehist-mode 1)
 
-;;; ファイル内のカーソル一を記憶する
+;;; ファイル内のカーソルを記憶する
 (setq-default save-place t)
 (require 'saveplace)
 
 ;;; モードラインに時刻を表示
 (display-time)
-
-;;; 行番号・桁番号を表示する
-;(line-number-mode 1)
-;(column-number-mode 1)
 
 ;;; GCを減らして軽くする
 (setq gc-cons-threshold (* 10 gc-cons-threshold))
