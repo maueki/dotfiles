@@ -1,0 +1,4 @@
+cd ~/work/weston-ivi-shell-1.4.0/
+cd ~/work/weston-ivi-shell/
+git diff 90e5c b17a504
+TERM=eshell git diff 90e5c b17a504

@@ -21,6 +21,9 @@
        )
        load-path))
 
+; open cheat sheet
+(global-set-key [f12] '(lambda () (interactive) (browse-url "http://qiita.com/maueki/private/32b604b58578a354b287")))
+
 ;; anything
 ;(require 'anything-startup)
 
@@ -34,10 +37,10 @@
 (global-set-key (kbd "M-y") 'helm-show-kill-ring)
 (global-set-key (kbd "C-x b") 'helm-for-files)
 (global-set-key (kbd "C-x I") 'helm-imenu)
+(global-set-key (kbd "C-x r l") 'helm-bookmarks)
 
 (setq helm-for-files-preferred-list
-      '(helm-source-bookmarks
-	helm-source-buffers-list
+      '(helm-source-buffers-list
 	helm-source-ls-git
         helm-source-recentf
         helm-source-file-cache
@@ -184,5 +187,49 @@ prefer for `sh-mode'.  It is automatically added to
 (require 'grep-a-lot)
 ;(grep-a-lot-setup-keys)
 
+(require 'anzu)
+(global-anzu-mode +1)
+
+(autoload 'markdown-mode "markdown-mode"
+  "Major mode for editing Markdown files" t)
+(add-to-list 'auto-mode-alist '("\\.text\\'" . markdown-mode))
+(add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
+(add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
+
+(require 'auto-complete)
+(require 'auto-complete-config)
+(add-to-list 'ac-dictionary-directories "~/.emacs.d/ac-dict")
+(ac-config-default)
+(require 'auto-complete-clang-async)
+
+(require 'auto-highlight-symbol)
+(global-auto-highlight-symbol-mode t)
+
+(add-to-list 'auto-mode-alist '("\\.mm\\'" . objc-mode))
+
+(when (boundp 'show-trailing-whitespace)
+  (setq-default show-trailing-whitespace t))
+(set-face-background 'trailing-whitespace "purple4")
+
+(setq whitespace-style
+      '(tabs tab-mark spaces space-mark))
+
+(setq whitespace-space-regexp "\\(\x3000+\\)")
+(setq whitespace-display-mappings
+      '((space-mark ?\x3000 [?\□])
+        (tab-mark   ?\t   [?\xBB ?\t])
+        ))
+(require 'whitespace)
+(global-whitespace-mode 1)
+(set-face-foreground 'whitespace-space "LightSlateGray")
+(set-face-background 'whitespace-space "DarkSlateGray")
+(set-face-foreground 'whitespace-tab "LightSlateGray")
+(set-face-background 'whitespace-tab "DarkSlateGray")
+
 (require 'init-loader)
 (init-loader-load "~/.emacs.d/inits")
+(let ((init-local "~/inits-local"))
+  (if (file-exists-p init-local)
+      (init-loader-load init-local)))
+
+(require 'guess-offset)
